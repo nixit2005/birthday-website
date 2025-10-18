@@ -66,8 +66,8 @@
     <section class="hero" id="birthday-content">
         <div class="welcome-card">
             <h1>✨ Happy Birthday Mahek! ✨</h1>
-            <p class="subtitle">Celebrating a Beautiful Friendship</p>
-            <p>From garba nights to unforgettable moments,<br>here's a special poem just for you</p>
+            <p class="subtitle">Celebrating a Treasured Friendship</p>
+            <p>From joyful garba nights to cherished memories,<br>here’s a heartfelt poem to celebrate our amazing bond.</p>
             <button class="scroll-hint" onclick="showStoryContent()">Read Our Story</button>
         </div>
         <div class="decorative-accent"></div>
@@ -83,7 +83,7 @@
             </div>
 
             <div class="stanza">
-                <p><span class="highlight">A journey of friendship through garba nights and beyond</span></p>
+                <p><span class="highlight">Through swirling steps and radiant nights,<br>Our friendship spins in endless light.</span></p>
             </div>
 
             <div class="stanza">
@@ -129,7 +129,7 @@
             </div>
 
             <div class="stanza">
-                <p><span class="quote">I'm BMCC, Second Year</span>, you said,</p>
+                <p><span class="quote">I'm in Second Year, BMCC</span>, I said,</p>
                 <p><span class="quote">When are the internals?</span> filled your head.</p>
                 <p>I calmed your fears, <span class="quote">Don't worry, it's okay</span>,</p>
                 <p>The schedule shifts—they'll find another day.</p>
@@ -607,7 +607,7 @@ function triggerHogwartsCandles() {
     }
 
     function openModal() {
-      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-hidden', 'false');
       textarea.value = '';
       textarea.focus();
     }
@@ -685,22 +685,7 @@ function triggerHogwartsCandles() {
       e.preventDefault();
       const text = textarea.value?.trim();
       if (!text) { textarea.focus(); return; }
-      try {
-        const res = await fetch('/api/wishes', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text })
-        });
-        const j = await res.json();
-        if (!res.ok) throw new Error(j && j.error ? j.error : 'Server error');
-        closeModal();
-        // nice feedback
-        launchConfetti({count:18, originX:50, originY:30});
-        alert('Wish saved — thank you!');
-      } catch (err) {
-        alert('Could not save wish. Please try again later.');
-        console.error(err);
-      }
+      // Save wish logic here...
     });
 
     // view wishes: require owner auth
