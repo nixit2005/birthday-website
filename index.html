@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mahek - A Friendship Poem</title>
+    <meta name="description" content="A heartfelt birthday celebration of Mahek with a beautiful poem about friendship">
+    <meta property="og:title" content="Happy Birthday Mahek - A Friendship Poem">
+    <meta property="og:description" content="A heartfelt birthday celebration of Mahek with a beautiful poem about friendship">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hogwarts_style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Progress bar (normal) -->
+    <div id="progress-container" aria-hidden="true">
+      <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    </div>
+
+    <!-- Clean Background -->
+    <div class="bg-texture"></div>
+
+    <!-- Floral Decorations with proper positioning -->
+    <div class="floral-decoration top-left">
+        <div class="flower flower-1">🌸</div>
+        <div class="flower flower-2">🌺</div>
+        <div class="flower flower-3">🌷</div>
+        <div class="vine">🌿</div>
+        <div class="bouquet">💐</div>
+    </div>
+
+    <div class="floral-decoration top-right">
+        <div class="flower flower-1">🌹</div>
+        <div class="flower flower-2">🌼</div>
+        <div class="flower flower-3">🌻</div>
+        <div class="vine">🍃</div>
+    </div>
+
+    <div class="floral-decoration bottom-left">
+        <div class="flower flower-1">🏵️</div>
+        <div class="flower flower-2">🌺</div>
+        <div class="flower flower-3">🌸</div>
+        <div class="vine">🌿</div>
+    </div>
+
+    <div class="floral-decoration bottom-right">
+        <div class="flower flower-1">🌷</div>
+        <div class="flower flower-2">🌹</div>
+        <div class="flower flower-3">🌼</div>
+        <div class="vine">🍃</div>
+        <div class="wine-glass">🍷</div>
+    </div>
+
+    <!-- Animation Containers -->
+    <div id="flower-rain" class="flower-rain"></div>
+    <div id="wine-cheers" class="wine-cheers"></div>
+    <div id="cake-light" class="cake-light"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="birthday-content">
+        <div class="welcome-card">
+            <h1>✨ Happy Birthday Mahek! ✨</h1>
+            <p class="subtitle">Celebrating a Beautiful Friendship</p>
+            <p>From garba nights to unforgettable moments,<br>here's a special poem just for you</p>
+            <button class="scroll-hint" onclick="showStoryContent()">Read Our Story</button>
+        </div>
+        <div class="decorative-accent"></div>
+    </section>
+
+    <!-- Story Content (Hidden Initially) -->
+    <div id="story-content" style="display:none; opacity:0; transition: opacity 0.5s ease;">
+        <!-- Poem Section -->
+        <section class="poem-container">
+            <div class="poem-intro">
+                <h2>From Silence to Smiles</h2>
+                <p>Here is a heartfelt poem celebrating our beautiful friendship</p>
+            </div>
+
+            <div class="stanza">
+                <p><span class="highlight">A journey of friendship through garba nights and beyond</span></p>
+            </div>
+
+            <div class="stanza">
+                <p>The garba hall was alive with sound and sway,</p>
+                <p>Mirror-work lehengas spinning through the day.</p>
+                <p>You laughed with friends beneath the colored lights,</p>
+                <p>While I stood quiet through those festive nights.</p>
+            </div>
+
+            <div class="stanza">
+                <p>No words I spoke, just silence at my side,</p>
+                <p>A wallflower content to simply hide.</p>
+                <p>But then you walked across that crowded floor,</p>
+                <p>And said <span class="quote">hello</span>—I couldn't ask for more.</p>
+            </div>
+
+            <div class="stanza">
+                <p>That single word, so simple and so kind,</p>
+                <p>Unlocked a door I'd shuttered in my mind.</p>
+                <p>I thought, <span class="quote">This girl's a vibe, authentic, real</span>,</p>
+                <p>A friendship born from what we both could feel.</p>
+            </div>
+
+            <div class="stanza">
+                <p>I went back home and pressed that follow key,</p>
+                <p>Then waited, worried—would you notice me?</p>
+                <p>No acceptance came, my heart began to sink,</p>
+                <p><span class="quote">I messed it up</span>, became my only think.</p>
+            </div>
+
+            <div class="stanza">
+                <p>But then you sent your own request my way,</p>
+                <p>And all my doubts dissolved like morning gray.</p>
+                <p>In class we laughed about that silly dance,</p>
+                <p>Two <span class="highlight">dumbass friends</span> who found their second chance.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Our Instagram became a steady stream,</p>
+                <p>Of reels and jokes and every shared daydream.</p>
+                <p>Then you approached with worry in your eyes,</p>
+                <p>About your tickets and exam surprise.</p>
+            </div>
+
+            <div class="stanza">
+                <p><span class="quote">I'm BMCC, Second Year</span>, you said,</p>
+                <p><span class="quote">When are the internals?</span> filled your head.</p>
+                <p>I calmed your fears, <span class="quote">Don't worry, it's okay</span>,</p>
+                <p>The schedule shifts—they'll find another day.</p>
+            </div>
+
+            <div class="stanza">
+                <p>So off you went and booked your travel plans,</p>
+                <p>But then your college changed with reckless hands.</p>
+                <p><span class="quote">Exams preponed!</span> the notice came around,</p>
+                <p>We had to cancel—trip dreams hit the ground.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Then once again they switched it back once more,</p>
+                <p><span class="quote">After Diwali</span>, like they'd said before.</p>
+                <p>You booked again through all that mess and stress,</p>
+                <p>Your college played us like a game of chess.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Meanwhile Navratri kept its festive beat,</p>
+                <p>We played together, making moments sweet.</p>
+                <p>The pre-event, then MIT's bright scene,</p>
+                <p>The best of times that either had been seen.</p>
+            </div>
+
+            <div class="stanza">
+                <p>The final night you had to leave us early,</p>
+                <p>Personal reasons made the evening swirly.</p>
+                <p>But through those days you juggled quite a lot,</p>
+                <p>Mumbai for garba, every moment caught.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Two, three days dancing in that city's heart,</p>
+                <p>Then straight to Delhi—what a fearless start!</p>
+                <p>Three years you'd waited for that trip to come,</p>
+                <p>Through cancelled tickets, you were finally done.</p>
+            </div>
+
+            <div class="stanza">
+                <p>But busy schedules meant the chats went cold,</p>
+                <p>My reels unseen, my messages untold.</p>
+                <p>At first you left them sitting there on <span class="highlight">seen</span>,</p>
+                <p>Then nothing came—no snaps, no in-between.</p>
+            </div>
+
+            <div class="stanza">
+                <p>My mind began to spiral, wondering why,</p>
+                <p><span class="quote">Did I mess up? Is this our friendship's goodbye?</span></p>
+                <p>On October thirteenth, I made up my mind,</p>
+                <p>To ask you straight—leave no doubts behind.</p>
+            </div>
+
+            <div class="stanza">
+                <p>But then you said with laughs and storage woes,</p>
+                <p><span class="quote">I uninstalled! My iPhone overthrows!</span></p>
+                <p>I laughed right back (my Android never could),</p>
+                <p>And dropped the question—what's the point? All good.</p>
+            </div>
+
+            <div class="stanza">
+                <p>You said your sorrys, guilt within your tone,</p>
+                <p>But I replied, <span class="quote">Hey, you're not alone</span>.</p>
+                <p>At least you answered, that's what matters most,</p>
+                <p>I just was worried—thought I'd lost my host.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Through ups and downs, through silence and through sound,</p>
+                <p>Our friendship grew on solid, steady ground.</p>
+                <p>From garba steps to college stress and more,</p>
+                <p>You gave me something worth being grateful for.</p>
+            </div>
+
+            <div class="stanza">
+                <p>I'll never know the words to thank you right,</p>
+                <p>For walking up that memorable night.</p>
+                <p>But I'll be there through every twist and turn,</p>
+                <p>Stand by your side—that's something you will learn.</p>
+            </div>
+
+            <div class="stanza">
+                <p>No right or wrong could shake this bond we made,</p>
+                <p>Through every storm, our friendship won't fade.</p>
+                <p>You're my <span class="highlight">best friend</span>, my vibe, my trusted crew,</p>
+                <p>And I am grateful—always—just for you.</p>
+            </div>
+        </section>
+
+        <!-- Final Birthday Section -->
+        <section class="final-section">
+            <div class="birthday-wishes">
+                <h2 class="main-birthday-title">🎉 Happy Birthday! 🎉</h2>
+                <p class="birthday-subtitle">May your special day be filled with love, laughter, and unforgettable moments</p>
+                <p class="birthday-message">Thank you for being such an incredible friend. Your kindness, laughter, and genuine spirit make every day brighter. Here's to creating more beautiful memories together!</p>
+
+                <!-- Make a Wish Section -->
+                <div class="make-wish-section">
+                    <h3 class="make-wish-title">Make a Wish! ✨</h3>
+                    <p>Close your eyes, make a wish, and let the magic happen...</p>
+                    <div class="wish-stars">
+                        <span>⭐</span>
+                        <span>🌟</span>
+                        <span>✨</span>
+                        <span>💫</span>
+                        <span>⭐</span>
+                    </div>
+                    <button class="wish-btn" id="open-wish-btn">Make a Wish ✨</button>
+                    <!-- button for owner to read wishes (hidden from regular visitors) -->
+                    <button class="share-btn owner-only" id="view-wishes-btn" aria-label="View saved wishes" aria-hidden="true">View Wishes</button>
+                </div>
+
+                <!-- Celebration Section -->
+                <div class="celebration-section">
+                    <div class="bouquet-wine-display">
+                        <div class="bouquet-item" role="button" tabindex="0" onclick="triggerFlowerRain()" onkeypress="if(event.key==='Enter') triggerFlowerRain()">
+                            <span class="bouquet-emoji">💐</span>
+                            <p>Beautiful Bouquet</p>
+                        </div>
+
+                        <div class="wine-item" role="button" tabindex="0" onclick="triggerWineCheers()" onkeypress="if(event.key==='Enter') triggerWineCheers()">
+                            <span class="wine-emoji">🍷</span>
+                            <p>Cheers to Friendship</p>
+                        </div>
+
+                        <div class="cake-item" role="button" tabindex="0" onclick="triggerHogwartsCandles(); launchConfetti({count: 30, originX: 50, originY: 50});" onkeypress="if(event.key==='Enter') { triggerHogwartsCandles(); launchConfetti({count: 30, originX: 50, originY: 50}); }">
+                            <span class="cake-emoji">🎂</span>
+                            <p>Birthday Joy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Celebration Elements -->
+                <div class="celebration-elements">
+                    <span class="celebration-emoji">🎈</span>
+                    <span class="celebration-emoji">🎊</span>
+                    <span class="celebration-emoji">🎁</span>
+                    <span class="celebration-emoji">🎉</span>
+                    <span class="celebration-emoji">🎂</span>
+                </div>
+
+                <!-- Final Message -->
+                <div class="final-message">
+                    <h3>With Love & Gratitude ❤️</h3>
+                    <p>Here's to many more years of friendship, laughter, and unforgettable memories. You deserve all the happiness in the world!</p>
+                    <button class="share-btn" id="share-btn" aria-label="Share this page">Share 📤</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<!-- Add modals / panels for wish entry and reading (place near end of body) -->
+<div id="wish-modal" class="modal" aria-hidden="true" role="dialog" aria-label="Make a wish dialog">
+  <div class="modal-content" role="document">
+    <h3>Make a Wish ✨</h3>
+    <textarea id="wish-text" rows="4" placeholder="Write your wish for Mahek..." aria-label="Your wish"></textarea>
+    <div class="modal-actions">
+      <button id="save-wish-btn" class="wish-btn">Save Wish & Celebrate</button>
+      <button id="cancel-wish-btn" class="share-btn">Cancel</button>
+    </div>
+    <small class="muted">Your wish is saved locally in this browser so you can read it later.</small>
+  </div>
+</div>
+
+<div id="wishes-panel" class="modal" aria-hidden="true" role="dialog" aria-label="Saved wishes dialog">
+  <div class="modal-content" role="document">
+    <h3>Saved Wishes</h3>
+    <div id="wishes-list" class="wishes-list" aria-live="polite"></div>
+    <div class="modal-actions">
+      <button id="close-wishes-btn" class="share-btn">Close</button>
+      <button id="clear-wishes-btn" class="share-btn">Clear All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('fade-out');
+            setTimeout(() => loading.style.display = 'none', 500);
+        });
+
+        // Show story content when "Read Our Story" is clicked
+        function showStoryContent() {
+            const storyContent = document.getElementById('story-content');
+            const birthdayContent = document.getElementById('birthday-content');
+
+            // Show the hidden content with inline styles
+            storyContent.style.display = 'block';
+
+            // Trigger opacity transition after display is set
+            setTimeout(() => {
+                storyContent.style.opacity = '1';
+            }, 50);
+
+            // Smooth scroll to the story after content is visible
+            setTimeout(() => {
+                storyContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+
+            // Initialize scroll animations for the newly shown content
+            observeElements();
+        }
+
+        // Scroll animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.stanza, .poem-intro, .birthday-wishes').forEach(el => {
+                observer.observe(el);
+            });
+        };
+
+        // Beautiful Elegant Flower Rain - Falls from top of screen randomly
+        function triggerFlowerRain() {
+            const flowerRain = document.getElementById('flower-rain');
+            flowerRain.innerHTML = '';
+            flowerRain.classList.add('active');
+
+            // Array of beautiful flowers and nature elements
+            const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼', '🌻', '💐', '🌿', '🍃', '🌷', '🌸', '🌺', '🌻', '🌼'];
+            const totalFlowers = 80; // More flowers for elegance
+
+            // Create multiple waves of flowers
+            for (let wave = 0; wave < 4; wave++) {
+                setTimeout(() => {
+                    for (let i = 0; i < totalFlowers / 4; i++) {
+                        setTimeout(() => {
+                            const flower = document.createElement('div');
+                            flower.className = 'falling-flower';
+                            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+
+                            // Random horizontal position across entire screen width
+                            flower.style.left = Math.random() * 100 + '%';
+
+                            // Start from above the screen
+                            flower.style.top = '-50px';
+
+                            // Random animation properties for elegant variety
+                            const duration = Math.random() * 4 + 3; // 3-7 seconds
+                            const delay = Math.random() * 2; // 0-2 second delay
+                            const size = Math.random() * 1 + 1.5; // 1.5-2.5 size multiplier
+
+                            flower.style.animationDuration = duration + 's';
+                            flower.style.animationDelay = delay + 's';
+                            flower.style.fontSize = size + 'rem';
+
+                            // Add some horizontal drift for realism
+                            const drift = (Math.random() - 0.5) * 200; // -100px to +100px drift
+                            flower.style.setProperty('--horizontal-drift', drift + 'px');
+
+                            flowerRain.appendChild(flower);
+
+                            // Remove flower after animation
+                            setTimeout(() => {
+                                if (flower.parentNode) {
+                                    flower.parentNode.removeChild(flower);
+                                }
+                            }, (duration + delay + 1) * 1000);
+                        }, i * 150); // Stagger flower creation
+                    }
+                }, wave * 2000); // Stagger waves
+            }
+
+            // Remove active class after all animations
+            setTimeout(() => {
+                flowerRain.classList.remove('active');
+            }, 15000);
+        }
+
+        // Realistic Wine Cheers Animation - Two wine glasses (🍷) clinking naturally
+        function triggerWineCheers() {
+            const wineCheers = document.getElementById('wine-cheers');
+            wineCheers.innerHTML = '';
+            wineCheers.classList.add('active');
+
+            // Create realistic wine glasses with natural movement
+            const leftGlass = document.createElement('div');
+            leftGlass.className = 'realistic-glass-left';
+            leftGlass.innerHTML = '🍷';
+
+            const rightGlass = document.createElement('div');
+            rightGlass.className = 'realistic-glass-right';
+            rightGlass.innerHTML = '🍷';
+
+            wineCheers.appendChild(leftGlass);
+            wineCheers.appendChild(rightGlass);
+
+            // Add subtle clink effect when glasses meet
+            setTimeout(() => {
+                const clink = document.createElement('div');
+                clink.className = 'glass-clink-effect';
+                clink.innerHTML = '✨';
+                wineCheers.appendChild(clink);
+
+                // Remove clink effect
+                setTimeout(() => {
+                    if (clink.parentNode) {
+                        clink.parentNode.removeChild(clink);
+                    }
+                }, 1000);
+            }, 1200); // Clink happens when glasses meet at 48% of animation
+
+            // Clean up glasses after realistic duration
+            setTimeout(() => {
+                if (leftGlass.parentNode) leftGlass.parentNode.removeChild(leftGlass);
+                if (rightGlass.parentNode) rightGlass.parentNode.removeChild(rightGlass);
+            }, 2500);
+
+            setTimeout(() => {
+                wineCheers.classList.remove('active');
+            }, 3000);
+        }
+
+function triggerHogwartsCandles() {
+            const cakeLight = document.getElementById('cake-light');
+            cakeLight.innerHTML = '';
+            cakeLight.classList.add('active');
+
+            // Create Hogwarts castle backdrop
+            setTimeout(() => {
+                const castle = document.createElement('div');
+                castle.className = 'hogwarts-castle';
+                castle.innerHTML = '🎂';
+                cakeLight.appendChild(castle);
+            }, 200);
+
+            // Create floating magical candles (like Great Hall)
+            const magicalCandles = ['🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️','🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️', '🕯️']; // 10 candles
+
+            for (let i = 0; i < magicalCandles.length; i++) {
+                setTimeout(() => {
+                    const candle = document.createElement('div');
+                    candle.className = 'hogwarts-candle';
+                    candle.innerHTML = magicalCandles[i];
+
+                    // Random positions across the screen for floating effect
+                    candle.style.left = Math.random() * 80 + 10 + '%'; // 10-90% width
+                    candle.style.top = Math.random() * 60 + 20 + '%';  // 20-80% height
+
+                    cakeLight.appendChild(candle);
+
+                    // Remove candle after animation
+                    setTimeout(() => {
+                        if (candle.parentNode) {
+                            candle.parentNode.removeChild(candle);
+                        }
+                    }, 8000);
+                }, i * 200); // Stagger candle appearance
+            }
+            // Clean up after animation
+            setTimeout(() => {
+                cakeLight.classList.remove('active');
+            }, 10000);
+        }
+
+        // Initialize - but don't observe elements yet since they're hidden
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only initialize loading screen, story content remains hidden
+        });
+
+        // simple pooled confetti using WAAPI (call window.simplePoolConfetti())
+  const _CONFETTI_POOL = [];
+  const _CONFETTI_POOL_SIZE = 24;
+  document.addEventListener('DOMContentLoaded', () => {
+    for (let i=0;i<_CONFETTI_POOL_SIZE;i++){
+      const d=document.createElement('div');
+      d.className='confetti'; d.dataset.busy='0';
+      document.body.appendChild(d);
+      _CONFETTI_POOL.push(d);
+    }
+  });
+  function simplePoolConfetti({count=12, originX=50, originY=45}={}) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let used=0;
+    for (let i=0;i<_CONFETTI_POOL.length && used<count;i++){
+      const el=_CONFETTI_POOL[i];
+      if (el.dataset.busy==='1') continue;
+      used++; el.dataset.busy='1';
+      el.style.background = ['#FFB3C6','#FFE3A8','#D6F5C6','#CDEBFF','#E6D4FF'][Math.floor(Math.random()*5)];
+      const size=6+Math.random()*10; el.style.width=size+'px'; el.style.height=(size*1.25)+'px';
+      el.style.left=(originX + (Math.random()-0.5)*30)+'%'; el.style.top=(originY + (Math.random()-0.5)*12)+'%';
+      el.style.visibility='visible';
+      const drift=(Math.random()-0.5)*480; const rotate=(Math.random()-0.5)*720; const dur=900+Math.random()*1200;
+      const anim = el.animate([
+        { transform: 'translate3d(0,0,0) rotate(0deg)', opacity:1 },
+        { transform: `translate3d(${drift}px, ${window.innerHeight}px,0) rotate(${rotate}deg)`, opacity:0.8 }
+      ], { duration: dur, easing: 'cubic-bezier(.2,.7,.2,1)'});
+      anim.onfinish = () => { el.style.visibility='hidden'; el.dataset.busy='0'; anim.cancel(); };
+    }
+  }
+  // map existing name to new pooled impl
+  window.launchConfetti = simplePoolConfetti;
+
+  // Share / Copy behavior
+  document.getElementById('share-btn')?.addEventListener('click', async () => {
+    const shareData = { title: document.title, text: 'Happy Birthday Mahek — open this!', url: location.href };
+    if (navigator.share) {
+      try { await navigator.share(shareData); return; } catch(e) { /* share cancelled or failed */ }
+    }
+    // fallback: copy link
+    try {
+      await navigator.clipboard.writeText(location.href);
+      const btn = document.getElementById('share-btn');
+      const prev = btn.textContent;
+      btn.textContent = 'Link copied ✓';
+      setTimeout(()=> btn.textContent = prev, 1600);
+    } catch {
+      alert('Copy link: ' + location.href);
+    }
+  });
+
+  // Simple progress bar (no plant)
+  (function(){
+    const bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    document.body.classList.add('has-progress');
+
+    function updateProgress(){
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const pct = scrollHeight > 0 ? Math.max(0, Math.min(100, (scrollTop / scrollHeight) * 100)) : 0;
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', Math.round(pct));
+    }
+
+    let ticking = false;
+    function onScroll(){
+      if (!ticking){
+        ticking = true;
+        requestAnimationFrame(()=>{ updateProgress(); ticking=false; });
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => requestAnimationFrame(updateProgress));
+    window.updateProgress = updateProgress;
+    requestAnimationFrame(updateProgress);
+  })();
+
+  /* Wish storage & UI (localStorage) */
+  (function(){
+    const KEY = 'birthday_wishes_v1';
+    const openBtn = document.getElementById('open-wish-btn');
+    const saveBtn = document.getElementById('save-wish-btn');
+    const cancelBtn = document.getElementById('cancel-wish-btn');
+    const modal = document.getElementById('wish-modal');
+    const textarea = document.getElementById('wish-text');
+    const viewBtn = document.getElementById('view-wishes-btn');
+    const wishesPanel = document.getElementById('wishes-panel');
+    const closeWishesBtn = document.getElementById('close-wishes-btn');
+    const clearWishesBtn = document.getElementById('clear-wishes-btn');
+    const wishesList = document.getElementById('wishes-list');
+
+    // Set a passcode only you know. Change this value to your secret.
+    // Note: this is client-side only — anyone with access to the file can see it.
+    const OWNER_PASSCODE = 'LeoMessi';
+
+    function getWishes() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || '[]');
+      } catch { return []; }
+    }
+    function saveWishes(arr) {
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
+
+    function openModal() {
+      modal.setAttribute('aria-hidden','false');
+      textarea.value = '';
+      textarea.focus();
+    }
+    function closeModal() {
+      modal.setAttribute('aria-hidden','true');
+      openBtn.focus();
+    }
+
+    function openWishesPanel(){
+      renderWishes();
+      wishesPanel.setAttribute('aria-hidden','false');
+      wishesList.focus?.();
+    }
+    function closeWishesPanel(){
+      wishesPanel.setAttribute('aria-hidden','true');
+      // keep the viewBtn hidden in UI; owner will generally use the shortcut/prompt
+    }
+
+    function renderWishes(){
+      const arr = getWishes();
+      if (!wishesList) return;
+      wishesList.innerHTML = '';
+      if (arr.length === 0) {
+        wishesList.innerHTML = '<div class="wish-item">No wishes yet — be the first to wish!</div>';
+        return;
+      }
+      arr.slice().reverse().forEach(w => {
+        const el = document.createElement('div');
+        el.className = 'wish-item';
+        const text = document.createElement('div');
+        text.textContent = w.text;
+        const meta = document.createElement('div');
+        meta.className = 'wish-meta';
+        const d = new Date(w.ts);
+        meta.textContent = d.toLocaleString();
+        el.appendChild(text);
+        el.appendChild(meta);
+        wishesList.appendChild(el);
+      });
+    }
+
+    // owner auth helpers (session-preserved)
+    function ownerIsAuthenticated() {
+      return sessionStorage.getItem('owner_auth') === '1';
+    }
+
+    function requestOwnerAuth() {
+      // if already authenticated this session, open panel immediately
+      if (ownerIsAuthenticated()) { openWishesPanel(); return; }
+
+      const attempt = prompt('Enter owner passcode to view saved wishes:');
+      if (!attempt) return;
+      if (attempt === OWNER_PASSCODE) {
+        sessionStorage.setItem('owner_auth','1');
+        openWishesPanel();
+      } else {
+        alert('Incorrect passcode.');
+      }
+    }
+
+    // open modal
+    openBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+
+    // cancel
+    cancelBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+
+    // save wish (replace localStorage version)
+    saveBtn?.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const text = textarea.value?.trim();
+      if (!text) { textarea.focus(); return; }
+      try {
+        const res = await fetch('/api/wishes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        const j = await res.json();
+        if (!res.ok) throw new Error(j && j.error ? j.error : 'Server error');
+        closeModal();
+        // nice feedback
+        launchConfetti({count:18, originX:50, originY:30});
+        alert('Wish saved — thank you!');
+      } catch (err) {
+        alert('Could not save wish. Please try again later.');
+        console.error(err);
+      }
+    });
+
+    // view wishes: require owner auth
+    viewBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      requestOwnerAuth();
+    });
+
+    closeWishesBtn?.addEventListener('click', (e) => { e.preventDefault(); closeWishesPanel(); });
+
+    clearWishesBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!confirm('Clear all saved wishes? This cannot be undone.')) return;
+      saveWishes([]);
+      renderWishes();
+    });
+
+    // close modals on Escape
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape') {
+        if (modal.getAttribute('aria-hidden') === 'false') closeModal();
+        if (wishesPanel.getAttribute('aria-hidden') === 'false') closeWishesPanel();
+      }
+      // owner shortcut: Ctrl+Shift+W opens passcode prompt
+      if (ev.ctrlKey && ev.shiftKey && ev.key.toLowerCase() === 'w') {
+        ev.preventDefault();
+        requestOwnerAuth();
+      }
+    });
+
+    // initial render for wishes-panel content
+    renderWishes();
+  })();
+</script>
+</body>
+</html>

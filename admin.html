@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin — Saved Wishes</title>
+  <style>
+    body{font-family:system-ui,Arial;padding:20px;background:#f8f8fb}
+    .box{max-width:900px;margin:0 auto;background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    textarea{width:100%;min-height:100px}
+    .wish{border-bottom:1px solid #eee;padding:10px 0}
+    .meta{font-size:12px;color:#666}
+    .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Owner — Wishes</h1>
+    <div id="auth-area">
+      <p>Enter owner password to view saved wishes</p>
+      <input id="pw" type="password" placeholder="owner password" />
+      <button id="login">Login</button>
+    </div>
+
+    <div id="admin-area" style="display:none">
+      <div class="actions">
+        <button id="logout">Logout</button>
+        <button id="clear">Clear All Wishes</button>
+      </div>
+      <div id="list"></div>
+    </div>
+  </div>
+
+  <script>
+    async function api(path, opts) {
+      const r = await fetch(path, opts);
+      return r.json();
+    }
+
+    document.getElementById('login').addEventListener('click', async () => {
+      const pw = document.getElementById('pw').value;
+      if (!pw) return alert('Enter password');
+      const res = await api('/admin/login', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({password:pw}) });
+      if (res.ok) { document.getElementById('auth-area').style.display='none'; document.getElementById('admin-area').style.display='block'; loadWishes(); }
+      else alert('Auth failed');
+    });
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await api('/admin/logout', { method:'POST' });
+      document.getElementById('auth-area').style.display='block';
+      document.getElementById('admin-area').style.display='none';
+    });
+
+    async function loadWishes(){
+      const data = await api('/api/wishes');
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      if (!Array.isArray(data) || data.length===0) { list.innerHTML = '<p>No wishes yet.</p>'; return; }
+      data.forEach(w => {
+        const d = new Date(w.ts);
+        const el = document.createElement('div'); el.className='wish';
+        el.innerHTML = `<div>${escapeHtml(w.text)}</div><div class="meta">${d.toLocaleString()}</div>`;
+        list.appendChild(el);
+      });
+    }
+
+    document.getElementById('clear').addEventListener('click', async () => {
+      if (!confirm('Clear all wishes?')) return;
+      await api('/api/wishes/clear', { method:'POST' });
+      loadWishes();
+    });
+
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  </script>
+</body>
+</html>

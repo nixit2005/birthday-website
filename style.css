@@ -1,0 +1,1045 @@
+/* Theme variables (merged: new tokens + compatibility aliases) */
+
+/* Ensure font import is placed before any rules */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  /* new theme tokens */
+  --bg: #fffaf8;
+  --card: #ffffff;
+  --muted: #79606f;
+  --accent-1: #ffdfe8;
+  --accent-2: #e8f6ff;
+  --accent-3: #f6f0ff;
+  --glass: rgba(255,255,255,0.6);
+  --radius: 14px;
+  --shadow-1: 0 6px 18px rgba(80,40,80,0.06);
+  --shadow-2: 0 12px 36px rgba(80,40,80,0.08);
+  --max-width: 920px;
+  --gap: 18px;
+  --text-lg: clamp(1rem, 1.8vw, 1.15rem);
+  --heading: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+
+  /* compatibility tokens used elsewhere in existing CSS */
+  --background: var(--bg);
+  --card-background: var(--card);
+  --text-primary: #4b3750; /* headings / primary text (matches pastel theme) */
+  --text-secondary: var(--muted);
+  --accent-red: #DC143C;
+  --accent-peach: #F4C2A1;
+  --accent-gold: #FFD166;
+  --accent-rose: #FF8A80;
+  --accent-lavender: #CE93D8;
+  --border-light: #E5E5E5;
+  --shadow: rgba(0,0,0,0.1);
+  --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+  --floral-shadow: 0 2px 10px rgba(156, 175, 136, 0.3);
+}
+
+/* reset & base */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg,var(--bg), #fff);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Clean background */
+.bg-texture{
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(156,175,136,0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(244,194,161,0.02) 0%, transparent 50%);
+}
+
+/* Floral Decorations - FIXED POSITIONING */
+.floral-decoration{
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  width: 150px;
+  height: 200px;
+}
+
+/* positioning helpers remain unchanged */
+.floral-decoration.top-left{ top:20px; left:20px; }
+.floral-decoration.top-right{ top:20px; right:20px; }
+.floral-decoration.bottom-left{ bottom:20px; left:20px; }
+.floral-decoration.bottom-right{ bottom:20px; right:20px; }
+
+/* Fixed flower positioning for right side */
+.floral-decoration.top-right .flower-1 {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.floral-decoration.top-right .flower-2 {
+    top: 30px;
+    right: 40px;
+    position: absolute;
+}
+
+.floral-decoration.top-right .flower-3 {
+    top: 60px;
+    right: 15px;
+    position: absolute;
+}
+
+.floral-decoration.top-right .vine {
+    top: 90px;
+    right: 25px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-1 {
+    bottom: 60px;
+    right: 0;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-2 {
+    bottom: 90px;
+    right: 40px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-3 {
+    bottom: 120px;
+    right: 15px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .vine {
+    bottom: 150px;
+    right: 25px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .wine-glass {
+    bottom: 0;
+    right: 5px;
+    position: absolute;
+}
+
+.flower {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.8;
+    animation: floralSway 4s ease-in-out infinite;
+    filter: drop-shadow(var(--floral-shadow));
+    z-index: 10;
+}
+
+.flower-1 {
+    animation-delay: 0s;
+}
+
+.flower-2 {
+    animation-delay: -1s;
+    font-size: 2rem;
+}
+
+.flower-3 {
+    animation-delay: -2s;
+    font-size: 1.8rem;
+}
+
+.vine {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.7;
+    animation: vineGrow 6s ease-in-out infinite;
+    z-index: 10;
+}
+
+.bouquet {
+    position: absolute;
+    top: 120px;
+    left: 5px;
+    font-size: 3rem;
+    opacity: 0.9;
+    animation: bouquetBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 15px rgba(255, 138, 128, 0.4));
+    z-index: 10;
+}
+
+.wine-glass {
+    font-size: 3rem;
+    opacity: 0.9;
+    animation: wineGlass 4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 15px rgba(156, 39, 176, 0.4));
+    z-index: 10;
+}
+
+@keyframes floralSway {
+    0%, 100% { transform: rotate(-3deg) translateY(0px); }
+    50% { transform: rotate(3deg) translateY(-5px); }
+}
+
+@keyframes vineGrow {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes bouquetBounce {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes wineGlass {
+    0%, 100% { transform: translateY(0px) rotate(2deg); }
+    50% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+/* Interactive Animation Overlays */
+.flower-rain, .wine-cheers, .cake-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.flower-rain.active, .wine-cheers.active, .cake-light.active {
+    opacity: 1;
+}
+
+/* BEAUTIFUL ELEGANT Falling Flower Animation */
+.falling-flower {
+    position: absolute;
+    font-size: 2rem;
+    animation: elegantFall linear;
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(156, 175, 136, 0.3));
+}
+
+@keyframes elegantFall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh) translateX(var(--horizontal-drift, 0px)) rotate(180deg) scale(1.1);
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) translateX(var(--horizontal-drift, 0px)) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* REALISTIC WINE GLASS CHEERS ANIMATION - Using Two Wine Glasses (🍷) */
+.realistic-glass-left, .realistic-glass-right {
+    position: absolute;
+    font-size: 4rem;
+    z-index: 1002;
+    filter: drop-shadow(0 3px 15px rgba(139, 69, 19, 0.6));
+}
+
+.realistic-glass-left {
+    top: 45%;
+    left: 25%;
+    animation: realisticCheersLeft 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: bottom center;
+}
+
+.realistic-glass-right {
+    top: 45%;
+    right: 25%;
+    animation: realisticCheersRight 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: bottom center;
+}
+
+@keyframes realisticCheersLeft {
+    0% {
+        transform: translateX(-120px) translateY(30px) rotate(-25deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(-60px) translateY(15px) rotate(-12deg) scale(0.9);
+    }
+    48% {
+        transform: translateX(-5px) translateY(0px) rotate(-2deg) scale(1);
+    }
+    52% {
+        transform: translateX(0px) translateY(-2px) rotate(0deg) scale(1.05);
+        filter: drop-shadow(0 4px 20px rgba(139, 69, 19, 0.8)) brightness(1.2);
+    }
+    65% {
+        transform: translateX(-3px) translateY(2px) rotate(-1deg) scale(0.98);
+    }
+    100% {
+        transform: translateX(-80px) translateY(40px) rotate(-20deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+@keyframes realisticCheersRight {
+    0% {
+        transform: translateX(120px) translateY(30px) rotate(25deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(60px) translateY(15px) rotate(12deg) scale(0.9);
+    }
+    48% {
+        transform: translateX(5px) translateY(0px) rotate(2deg) scale(1);
+    }
+    52% {
+        transform: translateX(0px) translateY(-2px) rotate(0deg) scale(1.05);
+        filter: drop-shadow(0 4px 20px rgba(139, 69, 19, 0.8)) brightness(1.2);
+    }
+    65% {
+        transform: translateX(3px) translateY(2px) rotate(1deg) scale(0.98);
+    }
+    100% {
+        transform: translateX(80px) translateY(40px) rotate(20deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+.glass-clink-effect {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    animation: realisticClink 1s ease-out forwards;
+    z-index: 1003;
+}
+
+@keyframes realisticClink {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 1;
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Clean Candle Blowout Animation - Candles blow up from cake */
+.blowout-candle {
+    position: absolute;
+    font-size: 2.5rem;
+    animation: candleBlowout 3s ease-out forwards;
+    pointer-events: none;
+    z-index: 1001;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes candleBlowout {
+    0% {
+        transform: translate(-50%, -50%) translateX(0px) translateY(0px) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    20% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x, 0px)) translateY(-50px) scale(1.2) rotate(45deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x, 0px)) translateY(-120px) scale(1.1) rotate(90deg);
+        opacity: 0.9;
+    }
+    60% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x, 0px)) translateY(-200px) scale(0.9) rotate(135deg);
+        opacity: 0.7;
+    }
+    80% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x, 0px)) translateY(-300px) scale(0.7) rotate(180deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x, 0px)) translateY(-400px) scale(0.3) rotate(225deg);
+        opacity: 0;
+    }
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: var(--background);
+    padding: 2rem;
+    z-index: 2;
+}
+
+.welcome-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 4rem 3rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+    max-width: 600px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
+    position: relative;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent-red);
+    border-radius: 2px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.hero .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-style: italic;
+    color: var(--accent-red);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Subtle decorative elements */
+.decorative-accent {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: var(--accent-peach);
+    opacity: 0.1;
+    border-radius: 50%;
+}
+
+.scroll-hint {
+    margin-top: 3rem;
+    padding: 1rem 2rem;
+    background: var(--accent-red);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.scroll-hint:hover {
+    background: var(--accent-peach);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(156, 175, 136, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Poem Section */
+.poem-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    background: var(--background);
+    position: relative;
+    z-index: 2;
+}
+
+.poem-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.poem-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.poem-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.poem-intro p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.stanza {
+    margin-bottom: 2rem;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--card-shadow);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.stanza::before {
+    content: '🌸';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 1.5rem;
+    opacity: 0.6;
+    animation: floralSway 3s ease-in-out infinite;
+}
+
+.stanza::after {
+    content: '🌿';
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    animation: floralSway 3s ease-in-out infinite;
+    animation-delay: -1.5s;
+}
+
+.stanza.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stanza:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.stanza p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    line-height: 1.8;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+}
+
+.highlight {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+.quote {
+    color: #DC143C;
+    font-style: italic;
+    position: relative;
+}
+
+.quote:before {
+    content: '"';
+    color: #DC143C;
+}
+
+.quote:after {
+    content: '"';
+    color: #DC143C;
+}
+
+/* Final Section */
+.final-section {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: var(--background);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+.birthday-wishes {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 4rem 3rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.birthday-wishes.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.birthday-wishes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent-peach);
+    border-radius: 2px;
+}
+
+.main-birthday-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.birthday-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--accent-red);
+    margin-bottom: 2rem;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.birthday-mesred {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Celebration Section with Enhanced Click Effects */
+.celebration-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(156, 175, 136, 0.1), rgba(244, 194, 161, 0.1));
+    border-radius: 20px;
+    border: 1px solid rgba(156, 175, 136, 0.3);
+}
+
+.bouquet-wine-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.bouquet-item, .wine-item, .cake-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.bouquet-item:hover, .wine-item:hover, .cake-item:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+
+.bouquet-item:active, .wine-item:active, .cake-item:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.bouquet-emoji, .wine-emoji, .cake-emoji {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: celebration 3s ease-in-out infinite;
+    transition: all 0.4s ease;
+}
+
+.bouquet-item:hover .bouquet-emoji {
+    animation: celebrationFast 0.6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 20px rgba(255, 138, 128, 0.6));
+}
+
+.wine-item:hover .wine-emoji {
+    animation: celebrationFast 0.6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 20px rgba(156, 39, 176, 0.6));
+}
+
+.cake-item:hover .cake-emoji {
+    animation: celebrationFast 0.6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 20px rgba(244, 194, 161, 0.6));
+}
+
+.bouquet-emoji {
+    animation-delay: 0s;
+    filter: drop-shadow(0 4px 15px rgba(255, 138, 128, 0.4));
+}
+
+.wine-emoji {
+    animation-delay: -1s;
+    filter: drop-shadow(0 4px 15px rgba(156, 39, 176, 0.4));
+}
+
+.cake-emoji {
+    animation-delay: -2s;
+    filter: drop-shadow(0 4px 15px rgba(244, 194, 161, 0.4));
+}
+
+@keyframes celebration {
+    0%, 100% { transform: scale(1) rotate(-2deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes celebrationFast {
+    0%, 100% { transform: scale(1) rotate(-8deg); }
+    50% { transform: scale(1.3) rotate(8deg); }
+}
+
+.bouquet-item p, .wine-item p, .cake-item p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0;
+}
+
+.interactive-elements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.birthday-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.birthday-icon:hover {
+    transform: translateY(-4px);
+    background: var(--accent-peach);
+    box-shadow: 0 8px 25px rgba(156, 175, 136, 0.4);
+}
+
+.birthday-icon:nth-child(2) {
+    background: var(--accent-peach);
+}
+
+.birthday-icon:nth-child(2):hover {
+    background: var(--accent-gold);
+}
+
+.birthday-icon:nth-child(3) {
+    background: var(--accent-gold);
+}
+
+.birthday-icon:nth-child(3):hover {
+    background: var(--accent-red);
+}
+
+.make-wish-section {
+    margin: 3rem 0;
+    padding: 2.5rem;
+    background: rgba(156, 175, 136, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(156, 175, 136, 0.2);
+}
+
+.make-wish-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    color: var(--accent-red);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.wish-stars {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    opacity: 0.8;
+}
+
+.wish-stars span {
+    display: inline-block;
+    margin: 0 0.2rem;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.wish-stars span:nth-child(1) { animation-delay: 0s; }
+.wish-stars span:nth-child(2) { animation-delay: 0.4s; }
+.wish-stars span:nth-child(3) { animation-delay: 0.8s; }
+.wish-stars span:nth-child(4) { animation-delay: 1.2s; }
+.wish-stars span:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.celebration-elements {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.celebration-emoji {
+    font-size: 2rem;
+    margin: 0 0.5rem;
+    display: inline-block;
+    opacity: 0.7;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.celebration-emoji:nth-child(1) { animation-delay: 0s; }
+.celebration-emoji:nth-child(2) { animation-delay: 0.2s; }
+.celebration-emoji:nth-child(3) { animation-delay: 0.4s; }
+.celebration-emoji:nth-child(4) { animation-delay: 0.6s; }
+.celebration-emoji:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.final-mesred {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: rgba(244, 194, 161, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(244, 194, 161, 0.2);
+}
+
+.final-mesred h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.final-mesred p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Simple scroll progress bar (fixed top) */
+#progress-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#progress-bar{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 6px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  transition: width 200ms linear;
+  border-bottom-right-radius: 6px;
+  will-change: width;
+}
+
+/* hide transition for reduced-motion users */
+@media (prefers-reduced-motion: reduce){
+  #progress-bar{ transition: none; }
+}
+
+/* optional small offset so the bar doesn't overlap content */
+body.has-progress { padding-top: 6px; }
+
+/* Accessibility & touch targets (append this at the end of the file) */
+.wish-btn,
+.share-btn,
+.scroll-hint,
+.bouquet-item,
+.cake-item {
+    min-height: 44px;
+    padding: 12px 16px;
+    border-radius: 12px;
+}
+
+/* Keyboard focus styles */
+:focus { outline: none; }
+:focus-visible {
+    box-shadow: 0 0 0 5px rgba(167,139,201,0.12);
+    border-radius: 10px;
+}
+
+/* Small share button style */
+.share-btn{
+    background: transparent;
+    border: 1px solid rgba(75,55,80,0.06);
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .18s ease, transform .12s ease;
+}
+.share-btn:hover{
+    background: rgba(255,255,255,0.6);
+    transform: translateY(-2px);
+}
+.share-btn:active { transform: translateY(0); }
+.share-btn:focus-visible { box-shadow: 0 0 0 5px rgba(167,139,201,0.10); }
+
+/* Small responsive tweak */
+@media (max-width:420px){
+    .wish-btn, .share-btn { padding: 10px 12px; font-size: 0.95rem; border-radius: 10px; }
+}
+
+/* Modal (simple centered dialog) */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12,10,14,0.45);
+  z-index: 10010;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.modal[aria-hidden="false"] { display: flex; }
+
+/* dialog content */
+.modal-content {
+  background: var(--card);
+  color: var(--text-primary);
+  max-width: 680px;
+  width: 100%;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+}
+
+/* form */
+.modal-content h3 { margin-top: 0; font-family: 'Playfair Display', serif; }
+.modal-content textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  font-size: 1rem;
+  font-family: inherit;
+  margin: 8px 0 12px 0;
+}
+
+/* actions row */
+.modal-actions { display:flex; gap:10px; justify-content:flex-end; align-items:center; margin-top:8px; }
+.muted { color: var(--text-secondary); font-size:0.9rem; }
+
+/* wishes list */
+.wishes-list { max-height: 40vh; overflow:auto; padding: 6px 0; }
+.wish-item {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.95));
+  border-radius: 10px;
+  padding:10px;
+  margin-bottom:8px;
+  border: 1px solid var(--border-light);
+  font-size:0.98rem;
+}
+.wish-meta { font-size:0.78rem; color:var(--text-secondary); margin-top:6px; }
+
+/* keep touch targets */
+#wish-text:focus, .wish-btn:focus, .share-btn:focus { outline: none; box-shadow: 0 0 0 5px rgba(167,139,201,0.08); }
+
+/* hide owner-only UI for regular visitors */
+.owner-only {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

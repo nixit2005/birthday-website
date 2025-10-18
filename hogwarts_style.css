@@ -1,0 +1,461 @@
+:root {
+    --background: #FEFEFE;
+    --card-background: #FFFFFF;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-sage: #9CAF88;
+    --accent-peach: #FFAB91;
+    --accent-gold: #F4C2A1;
+    --accent-rose: #FF8A80;
+    --accent-lavender: #CE93D8;
+    --border-light: #E5E5E5;
+    --shadow: rgba(0,0,0,0.1);
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+    --floral-shadow: 0 2px 10px rgba(156, 175, 136, 0.3);
+    --hogwarts-gold: #D4AF37;
+    --hogwarts-bronze: #CD7F32;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Clean background */
+.bg-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 25% 25%, rgba(156, 175, 136, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(244, 194, 161, 0.02) 0%, transparent 50%);
+}
+
+/* Floral Decorations - FIXED POSITIONING */
+.floral-decoration {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+    width: 150px;
+    height: 200px;
+}
+
+.floral-decoration.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.floral-decoration.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.floral-decoration.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.floral-decoration.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Fixed flower positioning for right side */
+.floral-decoration.top-right .flower-1 {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.floral-decoration.top-right .flower-2 {
+    top: 30px;
+    right: 40px;
+    position: absolute;
+}
+
+.floral-decoration.top-right .flower-3 {
+    top: 60px;
+    right: 15px;
+    position: absolute;
+}
+
+.floral-decoration.top-right .vine {
+    top: 90px;
+    right: 25px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-1 {
+    bottom: 60px;
+    right: 0;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-2 {
+    bottom: 90px;
+    right: 40px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .flower-3 {
+    bottom: 120px;
+    right: 15px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .vine {
+    bottom: 150px;
+    right: 25px;
+    position: absolute;
+}
+
+.floral-decoration.bottom-right .wine-glass {
+    bottom: 0;
+    right: 5px;
+    position: absolute;
+}
+
+.flower {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.8;
+    animation: floralSway 4s ease-in-out infinite;
+    filter: drop-shadow(var(--floral-shadow));
+    z-index: 10;
+}
+
+.flower-1 {
+    animation-delay: 0s;
+}
+
+.flower-2 {
+    animation-delay: -1s;
+    font-size: 2rem;
+}
+
+.flower-3 {
+    animation-delay: -2s;
+    font-size: 1.8rem;
+}
+
+.vine {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.7;
+    animation: vineGrow 6s ease-in-out infinite;
+    z-index: 10;
+}
+
+.bouquet {
+    position: absolute;
+    top: 120px;
+    left: 5px;
+    font-size: 3rem;
+    opacity: 0.9;
+    animation: bouquetBounce 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 15px rgba(255, 138, 128, 0.4));
+    z-index: 10;
+}
+
+.wine-glass {
+    font-size: 3rem;
+    opacity: 0.9;
+    animation: wineGlass 4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 15px rgba(156, 39, 176, 0.4));
+    z-index: 10;
+}
+
+@keyframes floralSway {
+    0%, 100% { transform: rotate(-3deg) translateY(0px); }
+    50% { transform: rotate(3deg) translateY(-5px); }
+}
+
+@keyframes vineGrow {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes bouquetBounce {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes wineGlass {
+    0%, 100% { transform: translateY(0px) rotate(2deg); }
+    50% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+/* Interactive Animation Overlays */
+.flower-rain, .wine-cheers, .cake-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.flower-rain.active, .wine-cheers.active, .cake-light.active {
+    opacity: 1;
+}
+
+/* Hogwarts Theme Background when active */
+.cake-light.active {
+    background: linear-gradient(
+        180deg,
+        rgba(25, 25, 50, 0.4) 0%,
+        rgba(40, 40, 70, 0.3) 50%,
+        rgba(25, 25, 50, 0.4) 100%
+    );
+}
+
+/* BEAUTIFUL ELEGANT Falling Flower Animation */
+.falling-flower {
+    position: absolute;
+    font-size: 2rem;
+    animation: elegantFall linear;
+    pointer-events: none;
+    z-index: 1001;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(156, 175, 136, 0.3));
+}
+
+@keyframes elegantFall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh) translateX(var(--horizontal-drift, 0px)) rotate(180deg) scale(1.1);
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) translateX(var(--horizontal-drift, 0px)) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* REALISTIC WINE GLASS CHEERS ANIMATION */
+.realistic-glass-left, .realistic-glass-right {
+    position: absolute;
+    font-size: 4rem;
+    z-index: 1002;
+    filter: drop-shadow(0 3px 15px rgba(139, 69, 19, 0.6));
+}
+
+.realistic-glass-left {
+    top: 45%;
+    left: 25%;
+    animation: realisticCheersLeft 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: bottom center;
+}
+
+.realistic-glass-right {
+    top: 45%;
+    right: 25%;
+    animation: realisticCheersRight 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: bottom center;
+}
+
+@keyframes realisticCheersLeft {
+    0% {
+        transform: translateX(-120px) translateY(30px) rotate(-25deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(-60px) translateY(15px) rotate(-12deg) scale(0.9);
+    }
+    48% {
+        transform: translateX(-5px) translateY(0px) rotate(-2deg) scale(1);
+    }
+    52% {
+        transform: translateX(0px) translateY(-2px) rotate(0deg) scale(1.05);
+        filter: drop-shadow(0 4px 20px rgba(139, 69, 19, 0.8)) brightness(1.2);
+    }
+    65% {
+        transform: translateX(-3px) translateY(2px) rotate(-1deg) scale(0.98);
+    }
+    100% {
+        transform: translateX(-80px) translateY(40px) rotate(-20deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+@keyframes realisticCheersRight {
+    0% {
+        transform: translateX(120px) translateY(30px) rotate(25deg) scale(0.8);
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(60px) translateY(15px) rotate(12deg) scale(0.9);
+    }
+    48% {
+        transform: translateX(5px) translateY(0px) rotate(2deg) scale(1);
+    }
+    52% {
+        transform: translateX(0px) translateY(-2px) rotate(0deg) scale(1.05);
+        filter: drop-shadow(0 4px 20px rgba(139, 69, 19, 0.8)) brightness(1.2);
+    }
+    65% {
+        transform: translateX(3px) translateY(2px) rotate(1deg) scale(0.98);
+    }
+    100% {
+        transform: translateX(80px) translateY(40px) rotate(20deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+.glass-clink-effect {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    animation: realisticClink 1s ease-out forwards;
+    z-index: 1003;
+}
+
+@keyframes realisticClink {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 1;
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* HOGWARTS-THEMED MAGICAL CANDLES ANIMATION */
+.hogwarts-castle {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6rem;
+    animation: castleAppear 2s ease-in-out forwards;
+    filter: drop-shadow(0 8px 30px rgba(212, 175, 55, 0.6));
+    z-index: 1001;
+}
+
+@keyframes castleAppear {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px) scale(1.2);
+        filter: drop-shadow(0 12px 40px rgba(212, 175, 55, 0.8)) brightness(1.3);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateX(-50%) translateY(0px) scale(1);
+        filter: drop-shadow(0 8px 30px rgba(212, 175, 55, 0.6));
+    }
+}
+
+.hogwarts-candle {
+    position: absolute;
+    font-size: 3rem;
+    animation: magicalFloat 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1002;
+    filter: drop-shadow(0 0 15px #D4AF37);
+}
+
+@keyframes magicalFloat {
+    0% {
+        transform: translateY(0px) rotate(0deg) scale(0.8);
+        opacity: 0;
+        filter: drop-shadow(0 0 10px #D4AF37) brightness(1);
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg) scale(1.1);
+        opacity: 1;
+        filter: drop-shadow(0 0 20px #D4AF37) brightness(1.5);
+    }
+    50% {
+        transform: translateY(-40px) rotate(-3deg) scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 25px #D4AF37) brightness(1.8);
+    }
+    75% {
+        transform: translateY(-20px) rotate(3deg) scale(1.1);
+        opacity: 1;
+        filter: drop-shadow(0 0 20px #D4AF37) brightness(1.5);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg) scale(0.8);
+        opacity: 0;
+        filter: drop-shadow(0 0 10px #D4AF37) brightness(1);
+    }
+}
+
+.hogwarts-sparkle {
+    position: absolute;
+    font-size: 2rem;
+    animation: magicalSparkle 6s ease-in-out forwards;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+@keyframes magicalSparkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 1;
+        filter: brightness(2) drop-shadow(0 0 15px #D4AF37);
+    }
+    50% {
+        transform: scale(2) rotate(360deg);
+        opacity: 1;
+        filter: brightness(2.5) drop-shadow(0 0 20px #D4AF37);
+    }
+    75% {
+        transform: scale(1.2) rotate(540deg);
+        opacity: 0.8;
+        filter: brightness(1.8) drop-shadow(0 0 12px #D4AF37);
+    }
+    100% {
+        transform: scale(0) rotate(720deg);
+        opacity: 0;
+    }
+}
