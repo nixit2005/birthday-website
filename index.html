@@ -11,6 +11,10 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hogwarts_style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -306,151 +310,166 @@
   </div>
 </div>
 
-<script>
-        // Loading screen
-        window.addEventListener('load', function() {
-            const loading = document.getElementById('loading');
-            loading.classList.add('fade-out');
-            setTimeout(() => loading.style.display = 'none', 500);
-        });
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
-        // Show story content when "Read Our Story" is clicked
-        function showStoryContent() {
-            const storyContent = document.getElementById('story-content');
-            const birthdayContent = document.getElementById('birthday-content');
+  const firebaseConfig = {
+    apiKey: "AIzaSyCi4jMfbKtM5y1KifJku9UzCvHa4Exd9b4",
+    authDomain: "birthday-website-7ee2c.firebaseapp.com",
+    projectId: "birthday-website-7ee2c",
+    storageBucket: "birthday-website-7ee2c.firebasestorage.app",
+    messagingSenderId: "758369557323",
+    appId: "1:758369557323:web:2df53b062aea82a7cb26ce"
+  };
 
-            // Show the hidden content with inline styles
-            storyContent.style.display = 'block';
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-            // Trigger opacity transition after display is set
-            setTimeout(() => {
-                storyContent.style.opacity = '1';
-            }, 50);
+  // Loading screen
+  window.addEventListener('load', function() {
+      const loading = document.getElementById('loading');
+      loading.classList.add('fade-out');
+      setTimeout(() => loading.style.display = 'none', 500);
+  });
 
-            // Smooth scroll to the story after content is visible
-            setTimeout(() => {
-                storyContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
+  // Show story content when "Read Our Story" is clicked
+  function showStoryContent() {
+      const storyContent = document.getElementById('story-content');
+      const birthdayContent = document.getElementById('birthday-content');
 
-            // Initialize scroll animations for the newly shown content
-            observeElements();
-        }
+      // Show the hidden content with inline styles
+      storyContent.style.display = 'block';
 
-        // Scroll animations
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+      // Trigger opacity transition after display is set
+      setTimeout(() => {
+          storyContent.style.opacity = '1';
+      }, 50);
 
-            document.querySelectorAll('.stanza, .poem-intro, .birthday-wishes').forEach(el => {
-                observer.observe(el);
-            });
-        };
+      // Smooth scroll to the story after content is visible
+      setTimeout(() => {
+          storyContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
 
-        // Beautiful Elegant Flower Rain - Falls from top of screen randomly
-        function triggerFlowerRain() {
-            const flowerRain = document.getElementById('flower-rain');
-            flowerRain.innerHTML = '';
-            flowerRain.classList.add('active');
+      // Initialize scroll animations for the newly shown content
+      observeElements();
+  }
 
-            // Array of beautiful flowers and nature elements
-            const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼', '🌻', '💐', '🌿', '🍃', '🌷', '🌸', '🌺', '🌻', '🌼'];
-            const totalFlowers = 80; // More flowers for elegance
+  // Scroll animations
+  const observeElements = () => {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+              }
+          });
+      }, { threshold: 0.1 });
 
-            // Create multiple waves of flowers
-            for (let wave = 0; wave < 4; wave++) {
-                setTimeout(() => {
-                    for (let i = 0; i < totalFlowers / 4; i++) {
-                        setTimeout(() => {
-                            const flower = document.createElement('div');
-                            flower.className = 'falling-flower';
-                            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+      document.querySelectorAll('.stanza, .poem-intro, .birthday-wishes').forEach(el => {
+          observer.observe(el);
+      });
+  };
 
-                            // Random horizontal position across entire screen width
-                            flower.style.left = Math.random() * 100 + '%';
+  // Beautiful Elegant Flower Rain - Falls from top of screen randomly
+  function triggerFlowerRain() {
+      const flowerRain = document.getElementById('flower-rain');
+      flowerRain.innerHTML = '';
+      flowerRain.classList.add('active');
 
-                            // Start from above the screen
-                            flower.style.top = '-50px';
+      // Array of beautiful flowers and nature elements
+      const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼', '🌻', '💐', '🌿', '🍃', '🌷', '🌸', '🌺', '🌻', '🌼'];
+      const totalFlowers = 80; // More flowers for elegance
 
-                            // Random animation properties for elegant variety
-                            const duration = Math.random() * 4 + 3; // 3-7 seconds
-                            const delay = Math.random() * 2; // 0-2 second delay
-                            const size = Math.random() * 1 + 1.5; // 1.5-2.5 size multiplier
+      // Create multiple waves of flowers
+      for (let wave = 0; wave < 4; wave++) {
+          setTimeout(() => {
+              for (let i = 0; i < totalFlowers / 4; i++) {
+                  setTimeout(() => {
+                      const flower = document.createElement('div');
+                      flower.className = 'falling-flower';
+                      flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
 
-                            flower.style.animationDuration = duration + 's';
-                            flower.style.animationDelay = delay + 's';
-                            flower.style.fontSize = size + 'rem';
+                      // Random horizontal position across entire screen width
+                      flower.style.left = Math.random() * 100 + '%';
 
-                            // Add some horizontal drift for realism
-                            const drift = (Math.random() - 0.5) * 200; // -100px to +100px drift
-                            flower.style.setProperty('--horizontal-drift', drift + 'px');
+                      // Start from above the screen
+                      flower.style.top = '-50px';
 
-                            flowerRain.appendChild(flower);
+                      // Random animation properties for elegant variety
+                      const duration = Math.random() * 4 + 3; // 3-7 seconds
+                      const delay = Math.random() * 2; // 0-2 second delay
+                      const size = Math.random() * 1 + 1.5; // 1.5-2.5 size multiplier
 
-                            // Remove flower after animation
-                            setTimeout(() => {
-                                if (flower.parentNode) {
-                                    flower.parentNode.removeChild(flower);
-                                }
-                            }, (duration + delay + 1) * 1000);
-                        }, i * 150); // Stagger flower creation
-                    }
-                }, wave * 2000); // Stagger waves
-            }
+                      flower.style.animationDuration = duration + 's';
+                      flower.style.animationDelay = delay + 's';
+                      flower.style.fontSize = size + 'rem';
 
-            // Remove active class after all animations
-            setTimeout(() => {
-                flowerRain.classList.remove('active');
-            }, 15000);
-        }
+                      // Add some horizontal drift for realism
+                      const drift = (Math.random() - 0.5) * 200; // -100px to +100px drift
+                      flower.style.setProperty('--horizontal-drift', drift + 'px');
 
-        // Realistic Wine Cheers Animation - Two wine glasses (🍷) clinking naturally
-        function triggerWineCheers() {
-            const wineCheers = document.getElementById('wine-cheers');
-            wineCheers.innerHTML = '';
-            wineCheers.classList.add('active');
+                      flowerRain.appendChild(flower);
 
-            // Create realistic wine glasses with natural movement
-            const leftGlass = document.createElement('div');
-            leftGlass.className = 'realistic-glass-left';
-            leftGlass.innerHTML = '🍷';
+                      // Remove flower after animation
+                      setTimeout(() => {
+                          if (flower.parentNode) {
+                              flower.parentNode.removeChild(flower);
+                          }
+                      }, (duration + delay + 1) * 1000);
+                  }, i * 150); // Stagger flower creation
+              }
+          }, wave * 2000); // Stagger waves
+      }
 
-            const rightGlass = document.createElement('div');
-            rightGlass.className = 'realistic-glass-right';
-            rightGlass.innerHTML = '🍷';
+      // Remove active class after all animations
+      setTimeout(() => {
+          flowerRain.classList.remove('active');
+      }, 15000);
+  }
 
-            wineCheers.appendChild(leftGlass);
-            wineCheers.appendChild(rightGlass);
+  // Realistic Wine Cheers Animation - Two wine glasses (🍷) clinking naturally
+  function triggerWineCheers() {
+      const wineCheers = document.getElementById('wine-cheers');
+      wineCheers.innerHTML = '';
+      wineCheers.classList.add('active');
 
-            // Add subtle clink effect when glasses meet
-            setTimeout(() => {
-                const clink = document.createElement('div');
-                clink.className = 'glass-clink-effect';
-                clink.innerHTML = '✨';
-                wineCheers.appendChild(clink);
+      // Create realistic wine glasses with natural movement
+      const leftGlass = document.createElement('div');
+      leftGlass.className = 'realistic-glass-left';
+      leftGlass.innerHTML = '🍷';
 
-                // Remove clink effect
-                setTimeout(() => {
-                    if (clink.parentNode) {
-                        clink.parentNode.removeChild(clink);
-                    }
-                }, 1000);
-            }, 1200); // Clink happens when glasses meet at 48% of animation
+      const rightGlass = document.createElement('div');
+      rightGlass.className = 'realistic-glass-right';
+      rightGlass.innerHTML = '🍷';
 
-            // Clean up glasses after realistic duration
-            setTimeout(() => {
-                if (leftGlass.parentNode) leftGlass.parentNode.removeChild(leftGlass);
-                if (rightGlass.parentNode) rightGlass.parentNode.removeChild(rightGlass);
-            }, 2500);
+      wineCheers.appendChild(leftGlass);
+      wineCheers.appendChild(rightGlass);
 
-            setTimeout(() => {
-                wineCheers.classList.remove('active');
-            }, 3000);
-        }
+      // Add subtle clink effect when glasses meet
+      setTimeout(() => {
+          const clink = document.createElement('div');
+          clink.className = 'glass-clink-effect';
+          clink.innerHTML = '✨';
+          wineCheers.appendChild(clink);
+
+          // Remove clink effect
+          setTimeout(() => {
+              if (clink.parentNode) {
+                  clink.parentNode.removeChild(clink);
+              }
+          }, 1000);
+      }, 1200); // Clink happens when glasses meet at 48% of animation
+
+      // Clean up glasses after realistic duration
+      setTimeout(() => {
+          if (leftGlass.parentNode) leftGlass.parentNode.removeChild(leftGlass);
+          if (rightGlass.parentNode) rightGlass.parentNode.removeChild(rightGlass);
+      }, 2500);
+
+      setTimeout(() => {
+          wineCheers.classList.remove('active');
+      }, 3000);
+  }
 
 function triggerHogwartsCandles() {
             const cakeLight = document.getElementById('cake-light');
@@ -681,6 +700,36 @@ function triggerHogwartsCandles() {
     });
 
     // save wish (replace localStorage version)
+     HEAD
+    saveBtn?.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const text = document.getElementById('wish-text')?.value?.trim();
+      if (!text) { 
+        document.getElementById('wish-text')?.focus();
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "wishes"), {
+          message: text,
+          createdAt: Date.now()
+        });
+        
+        // Close modal and show success feedback
+        document.getElementById('wish-modal').setAttribute('aria-hidden', 'true');
+        document.getElementById('open-wish-btn').focus();
+        
+        // Launch confetti for celebration
+        launchConfetti({count: 18, originX: 50, originY: 30});
+        
+        // Show success message
+        alert("Your wish has been saved! ✨");
+      } catch (error) {
+        console.error("Error saving wish:", error);
+        alert("Sorry, couldn't save your wish. Please try again!");
+      }
+    });
+
     // save wish (complete version)
 saveBtn?.addEventListener('click', async (e) => {
   e.preventDefault();
@@ -710,6 +759,7 @@ saveBtn?.addEventListener('click', async (e) => {
   textarea.value = '';
 });
 
+ e264abd27bf86f37d33fbf68e6ff8c3a0bb0c83c
 
     // view wishes: require owner auth
     viewBtn?.addEventListener('click', (e) => {
