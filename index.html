@@ -681,12 +681,35 @@ function triggerHogwartsCandles() {
     });
 
     // save wish (replace localStorage version)
-    saveBtn?.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const text = textarea.value?.trim();
-      if (!text) { textarea.focus(); return; }
-      // Save wish logic here...
-    });
+    // save wish (complete version)
+saveBtn?.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const text = textarea.value?.trim();
+  if (!text) { textarea.focus(); return; }
+  
+  // Get existing wishes and add new one
+  const wishes = getWishes();
+  wishes.push({
+    text: text,
+    ts: Date.now()
+  });
+  
+  // Save to localStorage
+  saveWishes(wishes);
+  
+  // Show success feedback
+  alert('Thank you for your wish! 🎉✨');
+  
+  // Optional: Launch confetti
+  if (window.launchConfetti) {
+    window.launchConfetti();
+  }
+  
+  // Close modal and reset
+  closeModal();
+  textarea.value = '';
+});
+
 
     // view wishes: require owner auth
     viewBtn?.addEventListener('click', (e) => {
