@@ -11,7 +11,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hogwarts_style.css">
-</head>
+    </head>
 <body>
   <!-- Replace the broken/non-module Firebase script with this module script (initializes Firestore and exposes submitWish) -->
   <script type="module">
@@ -340,6 +340,34 @@
   </div>
 </div>
 
+const saveBtn = document.getElementById('save-wish-btn');
+const textarea = document.getElementById('wish-text');
+
+saveBtn?.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const text = textarea.value?.trim();
+  if (!text) {
+    textarea.focus();
+    return;
+  }
+  
+  try {
+    await addDoc(collection(db, "wishes"), {
+      text: text,  // Store wish text
+      timestamp: serverTimestamp()
+      // Optionally: Add user info if you collect 'name' field
+    });
+    alert("Your wish has been saved and sent!");
+    textarea.value = ""; // Reset
+    // Optionally: close modal here
+  } catch (error) {
+    alert("Error saving your wish. Please try again.");
+    console.error(error);
+  }
+});
+</script>
+
+
 <script>
   // Loading screen
   window.addEventListener('load', function() {
@@ -613,19 +641,19 @@ function triggerHogwartsCandles() {
     requestAnimationFrame(updateProgress);
   })();
 
-  /* Wish storage & UI (Firestore only) - removed all localStorage functions/calls and stray `const KEY` */
-  (function(){
-    // DOM refs
-    const openBtn = document.getElementById('open-wish-btn');
-    const saveBtn = document.getElementById('save-wish-btn');
-    const cancelBtn = document.getElementById('cancel-wish-btn');
-    const modal = document.getElementById('wish-modal');
-    const textarea = document.getElementById('wish-text');
-    const viewBtn = document.getElementById('view-wishes-btn');
-    const wishesPanel = document.getElementById('wishes-panel');
-    const closeWishesBtn = document.getElementById('close-wishes-btn');
-    const clearWishesBtn = document.getElementById('clear-wishes-btn');
-    const wishesList = document.getElementById('wishes-list');
+  /* Wish storage & UI (localStorage) */
+//   (function(){
+//     const KEY = 'birthday_wishes_v1';
+//     const openBtn = document.getElementById('open-wish-btn');
+//     const saveBtn = document.getElementById('save-wish-btn');
+//     const cancelBtn = document.getElementById('cancel-wish-btn');
+//     const modal = document.getElementById('wish-modal');
+//     const textarea = document.getElementById('wish-text');
+//     const viewBtn = document.getElementById('view-wishes-btn');
+//     const wishesPanel = document.getElementById('wishes-panel');
+//     const closeWishesBtn = document.getElementById('close-wishes-btn');
+//     const clearWishesBtn = document.getElementById('clear-wishes-btn');
+//     const wishesList = document.getElementById('wishes-list');
 
     // Owner passcode (client-side helper)
     const OWNER_PASSCODE = 'LeoMessi';
@@ -641,6 +669,40 @@ function triggerHogwartsCandles() {
       openBtn?.focus();
     }
 
+    function openWishesPanel(){
+      renderWishes();
+      wishesPanel.setAttribute('aria-hidden','false');
+      wishesList.focus?.();
+    }
+    function closeWishesPanel(){
+      wishesPanel.setAttribute('aria-hidden','true');
+      // keep the viewBtn hidden in UI; owner will generally use the shortcut/prompt
+    }
+
+    // function renderWishes(){
+    //   const arr = getWishes();
+    //   if (!wishesList) return;
+    //   wishesList.innerHTML = '';
+    //   if (arr.length === 0) {
+    //     wishesList.innerHTML = '<div class="wish-item">No wishes yet — be the first to wish!</div>';
+    //     return;
+    //   }
+    //   arr.slice().reverse().forEach(w => {
+    //     const el = document.createElement('div');
+    //     el.className = 'wish-item';
+    //     const text = document.createElement('div');
+    //     text.textContent = w.text;
+    //     const meta = document.createElement('div');
+    //     meta.className = 'wish-meta';
+    //     const d = new Date(w.ts);
+    //     meta.textContent = d.toLocaleString();
+    //     el.appendChild(text);
+    //     el.appendChild(meta);
+    //     wishesList.appendChild(el);
+    //   });
+    // }
+
+    // owner auth helpers (session-preserved)
     function ownerIsAuthenticated() {
       return sessionStorage.getItem('owner_auth') === '1';
     }
@@ -688,38 +750,27 @@ function triggerHogwartsCandles() {
       closeModal();
     });
 
-    // NOTE: The actual Firestore addDoc handler should be in your module script
-    // where Firestore is imported (type="module"). If you already added that,
-    // saveBtn will be handled there. If not, implement the module handler.
-    // Here we keep a safe fallback that informs user if save handler is missing.
-    saveBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
-      const text = textarea?.value?.trim();
-      if (!text) { textarea?.focus(); return; }
-      // If a module-level submit handler (submitWish or addDoc) exists, it will run.
-      // Otherwise inform the user.
-      if (typeof window.submitWish === 'function') {
-        // If you exposed submitWish to window, call it:
-        window.submitWish(undefined, text).catch(err => {
-          console.error(err);
-          alert('Failed to send wish. Try again later.');
-        });
-        closeModal();
-        return;
-      }
-      // If no submit handler, show friendly message
-      alert('Saving is not configured. Please check Firebase setup.');
-      closeModal();
-    });
+    // save wish (replace localStorage version)
+    // saveBtn?.addEventListener('click', async (e) => {
+    //   e.preventDefault();
+    //   const text = textarea.value?.trim();
+    //   if (!text) { textarea.focus(); return; }
+    //   // Save wish logic here...
+    // });
 
+    // view wishes: require owner auth
     viewBtn?.addEventListener('click', (e) => {
       e?.preventDefault();
       requestOwnerAuth();
     });
 
-    closeWishesBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
-      closeWishesPanel();
+    closeWishesBtn?.addEventListener('click', (e) => { e.preventDefault(); closeWishesPanel(); });
+
+    clearWishesBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!confirm('Clear all saved wishes? This cannot be undone.')) return;
+    //   saveWishes([]);
+      renderWishes();
     });
 
     clearWishesBtn?.addEventListener('click', (e) => {
@@ -742,7 +793,11 @@ function triggerHogwartsCandles() {
 
     // initial render for wishes-panel content
     renderWishes();
-  })();
+  
+
+
+
+  
 </script>
 
 </body>
