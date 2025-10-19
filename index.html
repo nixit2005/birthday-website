@@ -14,38 +14,7 @@
     </head>
 <body>
   <!-- Replace the broken/non-module Firebase script with this module script (initializes Firestore and exposes submitWish) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-
-    // Firebase config - keep your actual config here (this matches the config already in your file)
-    const firebaseConfig = {
-      apiKey: "AIzaSyCi4jMfbKtM5y1KifJku9UzCvHa4Exd9b4",
-      authDomain: "birthday-website-7ee2c.firebaseapp.com",
-      projectId: "birthday-website-7ee2c",
-      storageBucket: "birthday-website-7ee2c.firebasestorage.app",
-      messagingSenderId: "758369557323",
-      appId: "1:758369557323:web:2df53b062aea82a7cb26ce",
-      measurementId: "G-X35B4D2MLE"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // submitWish(name, message) -> saves to Firestore 'wishes' collection
-    async function submitWish(name, message) {
-      if (!message || !message.trim()) throw new Error('Empty wish');
-      const docRef = await addDoc(collection(db, 'wishes'), {
-        name: name || null,
-        text: message.trim(),
-        timestamp: serverTimestamp()
-      });
-      return docRef;
-    }
-
-    // expose for the non-module UI script (the save button handler in your page calls window.submitWish)
-    window.submitWish = submitWish;
-  </script>
+  
 
     <!-- Loading Screen -->
     <div class="loading" id="loading">
