@@ -11,11 +11,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hogwarts_style.css">
-    </head>
+</head>
 <body>
-  <!-- Replace the broken/non-module Firebase script with this module script (initializes Firestore and exposes submitWish) -->
-  
-
     <!-- Loading Screen -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
@@ -309,186 +306,151 @@
   </div>
 </div>
 
-const saveBtn = document.getElementById('save-wish-btn');
-    if (saveBtn) {
-        saveBtn.addEventListener('click', async () => {
-            const textarea = document.querySelector('.wish-input textarea');
-            const text = textarea?.value?.trim();
-
-            if (!text) {
-                alert('Please write a wish first!');
-                return;
-            }
-
-            try {
-                // Save to localStorage instead of Firebase
-                const wishes = JSON.parse(localStorage.getItem('birthday-wishes') || '[]');
-                wishes.push({
-                    text: text,
-                    timestamp: new Date().toISOString()
-                });
-                localStorage.setItem('birthday-wishes', JSON.stringify(wishes));
-
-                alert('Your wish has been saved! 🎉');
-                textarea.value = ''; // Reset
-            } catch (error) {
-                alert('Error saving your wish. Please try again!');
-                console.error(error);
-            }
-        });
-    } catch (error) {
-    alert("Error saving your wish. Please try again.");
-    console.error(error);
-  }
-});
-</script>
-
-
 <script>
-  // Loading screen
-  window.addEventListener('load', function() {
-    const loading = document.getElementById('loading');
-    loading.classList.add('fade-out');
-    setTimeout(() => loading.style.display = 'none', 500);
-  });
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('fade-out');
+            setTimeout(() => loading.style.display = 'none', 500);
+        });
 
-  // Show story content when "Read Our Story" is clicked
-  function showStoryContent() {
-    const storyContent = document.getElementById('story-content');
-    const birthdayContent = document.getElementById('birthday-content');
+        // Show story content when "Read Our Story" is clicked
+        function showStoryContent() {
+            const storyContent = document.getElementById('story-content');
+            const birthdayContent = document.getElementById('birthday-content');
 
-    // Show the hidden content with inline styles
-    storyContent.style.display = 'block';
+            // Show the hidden content with inline styles
+            storyContent.style.display = 'block';
 
-    // Trigger opacity transition after display is set
-    setTimeout(() => {
-      storyContent.style.opacity = '1';
-    }, 50);
-
-    // Smooth scroll to the story after content is visible
-    setTimeout(() => {
-      storyContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 300);
-
-    // Initialize scroll animations for the newly shown content
-    observeElements();
-  }
-
-  // Scroll animations
-  const observeElements = () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.stanza, .poem-intro, .birthday-wishes').forEach(el => {
-      observer.observe(el);
-    });
-  };
-
-  // Beautiful Elegant Flower Rain - Falls from top of screen randomly
-  function triggerFlowerRain() {
-    const flowerRain = document.getElementById('flower-rain');
-    flowerRain.innerHTML = '';
-    flowerRain.classList.add('active');
-
-    // Array of beautiful flowers and nature elements
-    const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼', '🌻', '💐', '🌿', '🍃', '🌷', '🌸', '🌺', '🌻', '🌼'];
-    const totalFlowers = 80; // More flowers for elegance
-
-    // Create multiple waves of flowers
-    for (let wave = 0; wave < 4; wave++) {
-      setTimeout(() => {
-        for (let i = 0; i < totalFlowers / 4; i++) {
-          setTimeout(() => {
-            const flower = document.createElement('div');
-            flower.className = 'falling-flower';
-            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
-
-            // Random horizontal position across entire screen width
-            flower.style.left = Math.random() * 100 + '%';
-
-            // Start from above the screen
-            flower.style.top = '-50px';
-
-            // Random animation properties for elegant variety
-            const duration = Math.random() * 4 + 3; // 3-7 seconds
-            const delay = Math.random() * 2; // 0-2 second delay
-            const size = Math.random() * 1 + 1.5; // 1.5-2.5 size multiplier
-
-            flower.style.animationDuration = duration + 's';
-            flower.style.animationDelay = delay + 's';
-            flower.style.fontSize = size + 'rem';
-
-            // Add some horizontal drift for realism
-            const drift = (Math.random() - 0.5) * 200; // -100px to +100px drift
-            flower.style.setProperty('--horizontal-drift', drift + 'px');
-
-            flowerRain.appendChild(flower);
-
-            // Remove flower after animation
+            // Trigger opacity transition after display is set
             setTimeout(() => {
-              if (flower.parentNode) {
-                flower.parentNode.removeChild(flower);
-              }
-            }, (duration + delay + 1) * 1000);
-          }, i * 150); // Stagger flower creation
+                storyContent.style.opacity = '1';
+            }, 50);
+
+            // Smooth scroll to the story after content is visible
+            setTimeout(() => {
+                storyContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+
+            // Initialize scroll animations for the newly shown content
+            observeElements();
         }
-      }, wave * 2000); // Stagger waves
-    }
 
-    // Remove active class after all animations
-    setTimeout(() => {
-      flowerRain.classList.remove('active');
-    }, 15000);
-  }
+        // Scroll animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-  // Realistic Wine Cheers Animation - Two wine glasses (🍷) clinking naturally
-  function triggerWineCheers() {
-    const wineCheers = document.getElementById('wine-cheers');
-    wineCheers.innerHTML = '';
-    wineCheers.classList.add('active');
+            document.querySelectorAll('.stanza, .poem-intro, .birthday-wishes').forEach(el => {
+                observer.observe(el);
+            });
+        };
 
-    // Create realistic wine glasses with natural movement
-    const leftGlass = document.createElement('div');
-    leftGlass.className = 'realistic-glass-left';
-    leftGlass.innerHTML = '🍷';
+        // Beautiful Elegant Flower Rain - Falls from top of screen randomly
+        function triggerFlowerRain() {
+            const flowerRain = document.getElementById('flower-rain');
+            flowerRain.innerHTML = '';
+            flowerRain.classList.add('active');
 
-    const rightGlass = document.createElement('div');
-    rightGlass.className = 'realistic-glass-right';
-    rightGlass.innerHTML = '🍷';
+            // Array of beautiful flowers and nature elements
+            const flowers = ['🌸', '🌺', '🌷', '🌹', '🌼', '🌻', '💐', '🌿', '🍃', '🌷', '🌸', '🌺', '🌻', '🌼'];
+            const totalFlowers = 80; // More flowers for elegance
 
-    wineCheers.appendChild(leftGlass);
-    wineCheers.appendChild(rightGlass);
+            // Create multiple waves of flowers
+            for (let wave = 0; wave < 4; wave++) {
+                setTimeout(() => {
+                    for (let i = 0; i < totalFlowers / 4; i++) {
+                        setTimeout(() => {
+                            const flower = document.createElement('div');
+                            flower.className = 'falling-flower';
+                            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
 
-    // Add subtle clink effect when glasses meet
-    setTimeout(() => {
-      const clink = document.createElement('div');
-      clink.className = 'glass-clink-effect';
-      clink.innerHTML = '✨';
-      wineCheers.appendChild(clink);
+                            // Random horizontal position across entire screen width
+                            flower.style.left = Math.random() * 100 + '%';
 
-      // Remove clink effect
-      setTimeout(() => {
-        if (clink.parentNode) {
-          clink.parentNode.removeChild(clink);
+                            // Start from above the screen
+                            flower.style.top = '-50px';
+
+                            // Random animation properties for elegant variety
+                            const duration = Math.random() * 4 + 3; // 3-7 seconds
+                            const delay = Math.random() * 2; // 0-2 second delay
+                            const size = Math.random() * 1 + 1.5; // 1.5-2.5 size multiplier
+
+                            flower.style.animationDuration = duration + 's';
+                            flower.style.animationDelay = delay + 's';
+                            flower.style.fontSize = size + 'rem';
+
+                            // Add some horizontal drift for realism
+                            const drift = (Math.random() - 0.5) * 200; // -100px to +100px drift
+                            flower.style.setProperty('--horizontal-drift', drift + 'px');
+
+                            flowerRain.appendChild(flower);
+
+                            // Remove flower after animation
+                            setTimeout(() => {
+                                if (flower.parentNode) {
+                                    flower.parentNode.removeChild(flower);
+                                }
+                            }, (duration + delay + 1) * 1000);
+                        }, i * 150); // Stagger flower creation
+                    }
+                }, wave * 2000); // Stagger waves
+            }
+
+            // Remove active class after all animations
+            setTimeout(() => {
+                flowerRain.classList.remove('active');
+            }, 15000);
         }
-      }, 1000);
-    }, 1200); // Clink happens when glasses meet at 48% of animation
 
-    // Clean up glasses after realistic duration
-    setTimeout(() => {
-      if (leftGlass.parentNode) leftGlass.parentNode.removeChild(leftGlass);
-      if (rightGlass.parentNode) rightGlass.parentNode.removeChild(rightGlass);
-    }, 2500);
+        // Realistic Wine Cheers Animation - Two wine glasses (🍷) clinking naturally
+        function triggerWineCheers() {
+            const wineCheers = document.getElementById('wine-cheers');
+            wineCheers.innerHTML = '';
+            wineCheers.classList.add('active');
 
-    setTimeout(() => {
-      wineCheers.classList.remove('active');
-    }, 3000);
-  }
+            // Create realistic wine glasses with natural movement
+            const leftGlass = document.createElement('div');
+            leftGlass.className = 'realistic-glass-left';
+            leftGlass.innerHTML = '🍷';
+
+            const rightGlass = document.createElement('div');
+            rightGlass.className = 'realistic-glass-right';
+            rightGlass.innerHTML = '🍷';
+
+            wineCheers.appendChild(leftGlass);
+            wineCheers.appendChild(rightGlass);
+
+            // Add subtle clink effect when glasses meet
+            setTimeout(() => {
+                const clink = document.createElement('div');
+                clink.className = 'glass-clink-effect';
+                clink.innerHTML = '✨';
+                wineCheers.appendChild(clink);
+
+                // Remove clink effect
+                setTimeout(() => {
+                    if (clink.parentNode) {
+                        clink.parentNode.removeChild(clink);
+                    }
+                }, 1000);
+            }, 1200); // Clink happens when glasses meet at 48% of animation
+
+            // Clean up glasses after realistic duration
+            setTimeout(() => {
+                if (leftGlass.parentNode) leftGlass.parentNode.removeChild(leftGlass);
+                if (rightGlass.parentNode) rightGlass.parentNode.removeChild(rightGlass);
+            }, 2500);
+
+            setTimeout(() => {
+                wineCheers.classList.remove('active');
+            }, 3000);
+        }
 
 function triggerHogwartsCandles() {
             const cakeLight = document.getElementById('cake-light');
@@ -618,36 +580,73 @@ function triggerHogwartsCandles() {
   })();
 
   /* Wish storage & UI (localStorage) */
-//   (function(){
-//     const KEY = 'birthday_wishes_v1';
-//     const openBtn = document.getElementById('open-wish-btn');
-//     const saveBtn = document.getElementById('save-wish-btn');
-    if (saveBtn) {
-        saveBtn.addEventListener('click', async () => {
-            const textarea = document.querySelector('.wish-input textarea');
-            const text = textarea?.value?.trim();
+  (function(){
+    const KEY = 'birthday_wishes_v1';
+    const openBtn = document.getElementById('open-wish-btn');
+    const saveBtn = document.getElementById('save-wish-btn');
+    const cancelBtn = document.getElementById('cancel-wish-btn');
+    const modal = document.getElementById('wish-modal');
+    const textarea = document.getElementById('wish-text');
+    const viewBtn = document.getElementById('view-wishes-btn');
+    const wishesPanel = document.getElementById('wishes-panel');
+    const closeWishesBtn = document.getElementById('close-wishes-btn');
+    const clearWishesBtn = document.getElementById('clear-wishes-btn');
+    const wishesList = document.getElementById('wishes-list');
 
-            if (!text) {
-                alert('Please write a wish first!');
-                return;
-            }
+    // Set a passcode only you know. Change this value to your secret.
+    // Note: this is client-side only — anyone with access to the file can see it.
+    const OWNER_PASSCODE = 'LeoMessi';
 
-            try {
-                // Save to localStorage instead of Firebase
-                const wishes = JSON.parse(localStorage.getItem('birthday-wishes') || '[]');
-                wishes.push({
-                    text: text,
-                    timestamp: new Date().toISOString()
-                });
-                localStorage.setItem('birthday-wishes', JSON.stringify(wishes));
+    function getWishes() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || '[]');
+      } catch { return []; }
+    }
+    function saveWishes(arr) {
+      localStorage.setItem(KEY, JSON.stringify(arr));
+    }
 
-                alert('Your wish has been saved! 🎉');
-                textarea.value = ''; // Reset
-            } catch (error) {
-                alert('Error saving your wish. Please try again!');
-                console.error(error);
-            }
-        });
+    function openModal() {
+      modal.setAttribute('aria-hidden', 'false');
+      textarea.value = '';
+      textarea.focus();
+    }
+    function closeModal() {
+      modal.setAttribute('aria-hidden','true');
+      openBtn.focus();
+    }
+
+    function openWishesPanel(){
+      renderWishes();
+      wishesPanel.setAttribute('aria-hidden','false');
+      wishesList.focus?.();
+    }
+    function closeWishesPanel(){
+      wishesPanel.setAttribute('aria-hidden','true');
+      // keep the viewBtn hidden in UI; owner will generally use the shortcut/prompt
+    }
+
+    function renderWishes(){
+      const arr = getWishes();
+      if (!wishesList) return;
+      wishesList.innerHTML = '';
+      if (arr.length === 0) {
+        wishesList.innerHTML = '<div class="wish-item">No wishes yet — be the first to wish!</div>';
+        return;
+      }
+      arr.slice().reverse().forEach(w => {
+        const el = document.createElement('div');
+        el.className = 'wish-item';
+        const text = document.createElement('div');
+        text.textContent = w.text;
+        const meta = document.createElement('div');
+        meta.className = 'wish-meta';
+        const d = new Date(w.ts);
+        meta.textContent = d.toLocaleString();
+        el.appendChild(text);
+        el.appendChild(meta);
+        wishesList.appendChild(el);
+      });
     }
 
     // owner auth helpers (session-preserved)
@@ -656,7 +655,9 @@ function triggerHogwartsCandles() {
     }
 
     function requestOwnerAuth() {
+      // if already authenticated this session, open panel immediately
       if (ownerIsAuthenticated()) { openWishesPanel(); return; }
+
       const attempt = prompt('Enter owner passcode to view saved wishes:');
       if (!attempt) return;
       if (attempt === OWNER_PASSCODE) {
@@ -667,48 +668,52 @@ function triggerHogwartsCandles() {
       }
     }
 
-    function openWishesPanel(){
-      renderWishes();
-      wishesPanel?.setAttribute('aria-hidden','false');
-      wishesList?.focus?.();
-    }
-    function closeWishesPanel(){
-      wishesPanel?.setAttribute('aria-hidden','true');
-    }
-
-    // Minimal render: owner sees a message (Firestore fetch handled in module script or admin UI).
-    // Removed any localStorage rendering/fallback.
-    function renderWishes(){
-      if (!wishesList) return;
-      if (!ownerIsAuthenticated()) {
-        wishesList.innerHTML = '<div class="wish-item">Wishes are private — owner only.</div>';
-        return;
-      }
-      wishesList.innerHTML = '<div class="wish-item">Owner authenticated — fetch wishes from Firestore / admin console.</div>';
-    }
-
-    // Button wiring (open/close modal)
+    // open modal
     openBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
+      e.preventDefault();
       openModal();
     });
 
+    // cancel
     cancelBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
+      e.preventDefault();
       closeModal();
     });
 
     // save wish (replace localStorage version)
-    // saveBtn?.addEventListener('click', async (e) => {
-    //   e.preventDefault();
-    //   const text = textarea.value?.trim();
-    //   if (!text) { textarea.focus(); return; }
-    //   // Save wish logic here...
-    // });
+    // save wish (complete version)
+saveBtn?.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const text = textarea.value?.trim();
+  if (!text) { textarea.focus(); return; }
+  
+  // Get existing wishes and add new one
+  const wishes = getWishes();
+  wishes.push({
+    text: text,
+    ts: Date.now()
+  });
+  
+  // Save to localStorage
+  saveWishes(wishes);
+  
+  // Show success feedback
+  alert('Thank you for your wish! 🎉✨');
+  
+  // Optional: Launch confetti
+  if (window.launchConfetti) {
+    window.launchConfetti();
+  }
+  
+  // Close modal and reset
+  closeModal();
+  textarea.value = '';
+});
+
 
     // view wishes: require owner auth
     viewBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
+      e.preventDefault();
       requestOwnerAuth();
     });
 
@@ -717,22 +722,17 @@ function triggerHogwartsCandles() {
     clearWishesBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       if (!confirm('Clear all saved wishes? This cannot be undone.')) return;
-    //   saveWishes([]);
+      saveWishes([]);
       renderWishes();
     });
 
-    clearWishesBtn?.addEventListener('click', (e) => {
-      e?.preventDefault();
-      if (!ownerIsAuthenticated()) { alert('Owner only'); return; }
-      alert('Clearing wishes must be done from the Firebase console or admin UI.');
-    });
-
-    // keyboard handling
+    // close modals on Escape
     document.addEventListener('keydown', (ev) => {
       if (ev.key === 'Escape') {
-        if (modal?.getAttribute('aria-hidden') === 'false') closeModal();
-        if (wishesPanel?.getAttribute('aria-hidden') === 'false') closeWishesPanel();
+        if (modal.getAttribute('aria-hidden') === 'false') closeModal();
+        if (wishesPanel.getAttribute('aria-hidden') === 'false') closeWishesPanel();
       }
+      // owner shortcut: Ctrl+Shift+W opens passcode prompt
       if (ev.ctrlKey && ev.shiftKey && ev.key.toLowerCase() === 'w') {
         ev.preventDefault();
         requestOwnerAuth();
@@ -741,12 +741,7 @@ function triggerHogwartsCandles() {
 
     // initial render for wishes-panel content
     renderWishes();
-  
-
-
-
-  
+  })();
 </script>
-
 </body>
 </html>
